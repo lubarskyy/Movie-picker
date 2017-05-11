@@ -10,7 +10,8 @@ class RandomMovie extends React.Component {
               <h1>{el.title}</h1>
               <p>{el.overview}</p>
               <img src={'https://image.tmdb.org/t/p/w500/'+el.poster_path}></img>
-            </div>)
+            </div>
+          )
         })}
       </div>
     )
