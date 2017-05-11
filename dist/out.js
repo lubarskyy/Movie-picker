@@ -10262,7 +10262,7 @@ var Question = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'select',
-        { onChange: this.props.handleChange, value: this.props.data },
+        { className: 'form__options', onChange: this.props.handleChange, value: this.props.data },
         _react2.default.createElement(
           'option',
           null,
@@ -10338,7 +10338,12 @@ var Questionnaire = function (_React$Component) {
           _react2.default.createElement(
             'form',
             { className: 'form__select' },
-            _react2.default.createElement(_question2.default, { data: this.props.year, dataToShow: ['2014', '2015', '2016', '2017'], handleChange: this.props.handleChangeYear }),
+            _react2.default.createElement(
+              'label',
+              { className: 'form__label' },
+              'Wybierz rok produkcji',
+              _react2.default.createElement(_question2.default, { data: this.props.year, dataToShow: ['2014', '2015', '2016', '2017'], handleChange: this.props.handleChangeYear })
+            ),
             _react2.default.createElement(_question2.default, {
               data: genre,
               dataToShow: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'],
@@ -10391,7 +10396,8 @@ var RandomMovie = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (RandomMovie.__proto__ || Object.getPrototypeOf(RandomMovie)).call(this, props));
 
     _this.state = {
-      YTid: []
+      YTid: [],
+      display: 'none'
     };
     return _this;
   }
@@ -10406,46 +10412,59 @@ var RandomMovie = function (_React$Component) {
         null,
         this.props.movies.map(function (el, index) {
           return _react2.default.createElement(
-            'div',
-            { className: 'movie', style: { backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + el.backdrop_path + ')' } },
+            'section',
+            null,
             _react2.default.createElement(
               'div',
-              { className: 'movie__content' },
+              { className: 'movie', style: { backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + el.backdrop_path + ')' } },
               _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement('img', { className: 'movie__poster', src: 'https://image.tmdb.org/t/p/w500/' + el.poster_path })
-              ),
-              _react2.default.createElement(
-                'div',
-                null,
+                { className: 'movie__content' },
                 _react2.default.createElement(
-                  'h1',
+                  'div',
                   null,
-                  el.title
+                  _react2.default.createElement('img', { className: 'movie__poster', src: 'https://image.tmdb.org/t/p/w500/' + el.poster_path })
                 ),
                 _react2.default.createElement(
-                  'h2',
-                  null,
-                  'Realese date: ',
-                  el.release_date
-                ),
-                _react2.default.createElement(
-                  'h2',
-                  null,
-                  'Rating: ',
-                  el.vote_average,
-                  '/10, based on ',
-                  el.vote_count,
-                  ' votes'
-                ),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  el.overview
-                ),
-                _react2.default.createElement('iframe', { src: 'https://www.youtube.com/embed/' + _this2.state.YTid[index] })
+                  'div',
+                  { className: 'movie__info' },
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'movie__title' },
+                    el.title
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'movie__release' },
+                    'Release date: ',
+                    el.release_date
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'movie__vote' },
+                    'Rating: ',
+                    el.vote_average,
+                    '/10, based on ',
+                    el.vote_count,
+                    ' votes'
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'movie__overview' },
+                    'Overview:'
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    { className: 'movie__description' },
+                    el.overview
+                  )
+                )
               )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'movie__trailer' },
+              _react2.default.createElement('iframe', { className: 'movie__trailer-video', src: 'https://www.youtube.com/embed/' + _this2.state.YTid[index] })
             )
           );
         })

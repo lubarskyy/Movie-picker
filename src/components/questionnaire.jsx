@@ -9,7 +9,9 @@ class Questionnaire extends React.Component{
       <div className='main__leftside'>
         <div className='form'>
           <form className='form__select'>
-            <Question data={this.props.year} dataToShow={['2014', '2015', '2016', '2017']} handleChange={this.props.handleChangeYear}/>
+            <label className='form__label'>Wybierz rok produkcji
+              <Question data={this.props.year} dataToShow={['2014', '2015', '2016', '2017']} handleChange={this.props.handleChangeYear}/>
+            </label>
             <Question
               data={genre}
               dataToShow={['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western']}

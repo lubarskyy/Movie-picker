@@ -1,5 +1,29 @@
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent; }
+
+main, article, aside, figure, footer, header, nav, section, details, summary {
+  display: block; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
 .main {
-  display: flex; }
+  display: flex;
+  background: linear-gradient(to left, rgba(8, 28, 36, 0.9), rgba(217, 210, 197, 0.9));
+  width: 100vw;
+  height: 100%;
+  color: #fff;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300; }
   .main__movies {
     width: 80vw; }
   .main__leftside {
@@ -10,6 +34,16 @@
   .form__select {
     display: flex;
     flex-direction: column; }
+  .form__label {
+    display: block; }
+  .form__options {
+    display: block;
+    border: 1px solid black;
+    width: 250px;
+    height: 70px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 40px;
+    background-color: transparent; }
 
 .movie {
   width: 80vw;
@@ -17,7 +51,7 @@
   background-size: cover; }
   .movie::before {
     content: '';
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background: linear-gradient(to left, rgba(8, 28, 36, 0.9), rgba(217, 210, 197, 0.9));
     position: absolute;
     height: 500px;
     width: 80vw;
@@ -29,4 +63,26 @@
     display: flex; }
   .movie__poster {
     width: 300px;
-    height: 450px; }
+    height: 450px;
+    margin: 23px 35px; }
+  .movie__trailer-video {
+    width: 100%;
+    height: 500px; }
+  .movie__trailer {
+    display: flex;
+    justify-content: center;
+    width: 80vw; }
+  .movie__info {
+    display: flex;
+    flex-direction: column;
+    margin: 45px 50px 45px 0; }
+  .movie__title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 35px; }
+  .movie__overview {
+    font-size: 30px;
+    font-weight: 400;
+    margin: 50px 0 25px 0; }
+  .movie__description {
+    font-size: 20px; }
