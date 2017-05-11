@@ -10374,10 +10374,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var RandomMovie = function (_React$Component) {
   _inherits(RandomMovie, _React$Component);
 
-  function RandomMovie() {
+  function RandomMovie(props) {
     _classCallCheck(this, RandomMovie);
 
-    return _possibleConstructorReturn(this, (RandomMovie.__proto__ || Object.getPrototypeOf(RandomMovie)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (RandomMovie.__proto__ || Object.getPrototypeOf(RandomMovie)).call(this, props));
+
+    _this.state = {
+      YTid: []
+    };
+    return _this;
   }
 
   _createClass(RandomMovie, [{
@@ -10402,8 +10407,28 @@ var RandomMovie = function (_React$Component) {
             ),
             _react2.default.createElement('img', { src: 'https://image.tmdb.org/t/p/w500/' + el.poster_path })
           );
+        }),
+        this.state.YTid.map(function (el) {
+          return _react2.default.createElement('iframe', { src: 'https://www.youtube.com/embed/' + el });
         })
       );
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var _this2 = this;
+
+      var youTubeLinks = [];
+      if (this.state.YTid.length == 0) {
+        this.props.movies.forEach(function (el) {
+          fetch('https://api.themoviedb.org/3/movie/' + el.id + '/videos?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&language=en-US').then(function (response) {
+            response.json().then(function (data) {
+              youTubeLinks.push(data.results[0].key);
+              _this2.setState({ YTid: youTubeLinks });
+            });
+          });
+        });
+      }
     }
   }]);
 
