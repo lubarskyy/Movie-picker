@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Questionnaire from './components/questionnaire.jsx';
 import MovieSection from './components/movie-section.jsx';
+require('../sass/style.scss')
 
 class App extends React.Component {
   constructor(props){
@@ -15,7 +16,7 @@ class App extends React.Component {
   }
   render(){
     return (
-      <section>
+      <section className='main'>
         <Questionnaire year={this.state.year} genre={this.state.genre} runtime={this.state.runtime} language={this.state.language}
           handleChangeYear={this.handleChangeYear} handleChangeGenre={this.handleChangeGenre}
           handleChangeRuntime={this.handleChangeRuntime} handleChangeLanguage={this.handleChangeLanguage}/>

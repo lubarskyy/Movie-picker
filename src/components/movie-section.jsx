@@ -11,7 +11,7 @@ class MovieSection extends React.Component {
   }
   render(){
     return (
-      <section>
+      <section className='main__movies'>
         <button onClick={this.setMovies}>SET URL</button>
         <button onClick={this.fetchMovies}>SHOW MOVIES</button>
         <RandomMovie movies={this.state.movies}/>
@@ -27,6 +27,7 @@ class MovieSection extends React.Component {
     let randomFetchedMovies = [];
     fetch(this.state.url).then(response=>{
       response.json().then(data=>{
+        console.log(data.results)
         data.results.forEach(el=>{
           randomFetchedMovies.push(el);
         })

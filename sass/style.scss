@@ -1,0 +1,41 @@
+.main {
+  display: flex;
+  &__movies {
+    width: 80vw;
+  }
+  &__leftside {
+    width: 20vw;
+  }
+}
+
+.form {
+  position: fixed;
+  &__select {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.movie {
+  width: 80vw;
+  height: 500px;
+  background-size: cover;
+  &::before {
+    content: '';
+    background: linear-gradient(to right, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5));
+    position: absolute;
+    height: 500px;
+    width: 80vw;
+    z-index: 1;
+  }
+  &__content {
+    position: absolute;
+    width: 80vw;
+    z-index: 2;
+    display: flex;
+  }
+  &__poster {
+    width: 300px;
+    height: 450px;
+  }
+}
