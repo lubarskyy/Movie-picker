@@ -9656,7 +9656,19 @@ var App = function (_React$Component) {
   return App;
 }(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('#app'));
+document.addEventListener('DOMContentLoaded', function () {
+  _reactDom2.default.render(_react2.default.createElement(App, null), document.querySelector('#app'));
+
+  var panel = document.querySelector('.main__leftside');
+  var form = document.querySelector('.form');
+  var movies = document.querySelector('.main__movies');
+
+  panel.addEventListener('click', function () {
+    panel.style.width = '5%';
+    form.style.display = 'none';
+    movies.style.width = '100vw';
+  });
+});
 
 /***/ }),
 /* 82 */
@@ -10203,6 +10215,7 @@ var MovieSection = function (_React$Component) {
       return _react2.default.createElement(
         'section',
         { className: 'main__movies' },
+        _react2.default.createElement(_randomMovie2.default, { movies: this.state.movies }),
         _react2.default.createElement(
           'button',
           { onClick: this.setMovies },
@@ -10212,8 +10225,7 @@ var MovieSection = function (_React$Component) {
           'button',
           { onClick: this.fetchMovies },
           'SHOW MOVIES'
-        ),
-        _react2.default.createElement(_randomMovie2.default, { movies: this.state.movies })
+        )
       );
     }
   }]);
@@ -10341,16 +10353,31 @@ var Questionnaire = function (_React$Component) {
             _react2.default.createElement(
               'label',
               { className: 'form__label' },
-              'Wybierz rok produkcji',
+              'Production year',
               _react2.default.createElement(_question2.default, { data: this.props.year, dataToShow: ['2014', '2015', '2016', '2017'], handleChange: this.props.handleChangeYear })
             ),
-            _react2.default.createElement(_question2.default, {
-              data: genre,
-              dataToShow: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'],
-              handleChange: this.props.handleChangeGenre
-            }),
-            _react2.default.createElement(_question2.default, { data: this.props.runtime, dataToShow: ['60', '90', '120'], handleChange: this.props.handleChangeRuntime }),
-            _react2.default.createElement(_question2.default, { data: this.props.language, dataToShow: ['en', 'pl'], handleChange: this.props.handleChangeLanguage })
+            _react2.default.createElement(
+              'label',
+              { className: 'form__label' },
+              'Genre',
+              _react2.default.createElement(_question2.default, {
+                data: genre,
+                dataToShow: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'],
+                handleChange: this.props.handleChangeGenre
+              })
+            ),
+            _react2.default.createElement(
+              'label',
+              { className: 'form__label' },
+              'Runtime',
+              _react2.default.createElement(_question2.default, { data: this.props.runtime, dataToShow: ['60', '90', '120'], handleChange: this.props.handleChangeRuntime })
+            ),
+            _react2.default.createElement(
+              'label',
+              { className: 'form__label' },
+              'Language',
+              _react2.default.createElement(_question2.default, { data: this.props.language, dataToShow: ['en', 'pl'], handleChange: this.props.handleChangeLanguage })
+            )
           )
         )
       );
@@ -10396,8 +10423,7 @@ var RandomMovie = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (RandomMovie.__proto__ || Object.getPrototypeOf(RandomMovie)).call(this, props));
 
     _this.state = {
-      YTid: [],
-      display: 'none'
+      YTid: []
     };
     return _this;
   }
@@ -10493,12 +10519,6 @@ var RandomMovie = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = RandomMovie;
-
-// {this.state.YTid.map(el=>{
-//   return <iframe src={'https://www.youtube.com/embed/'+el}></iframe>
-// })}
-
-// <img src={'https://image.tmdb.org/t/p/w500/'+el.backdrop_path}></img>
 
 /***/ }),
 /* 87 */

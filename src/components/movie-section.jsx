@@ -12,9 +12,9 @@ class MovieSection extends React.Component {
   render(){
     return (
       <section className='main__movies'>
+        <RandomMovie movies={this.state.movies}/>
         <button onClick={this.setMovies}>SET URL</button>
         <button onClick={this.fetchMovies}>SHOW MOVIES</button>
-        <RandomMovie movies={this.state.movies}/>
       </section>
     )
   }

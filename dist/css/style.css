@@ -20,30 +20,37 @@ html {
   display: flex;
   background: linear-gradient(to left, rgba(8, 28, 36, 0.9), rgba(217, 210, 197, 0.9));
   width: 100vw;
-  height: 100%;
+  height: 390vh;
   color: #fff;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300; }
   .main__movies {
     width: 80vw; }
   .main__leftside {
-    width: 20vw; }
+    width: 20vw;
+    border: 1px solid #fff;
+    transition: all .3s; }
 
 .form {
-  position: fixed; }
+  position: fixed;
+  width: 20vw; }
   .form__select {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    align-items: center; }
   .form__label {
-    display: block; }
+    display: block;
+    font-size: 30px;
+    font-weight: 600;
+    margin-top: 50px; }
   .form__options {
     display: block;
-    border: 1px solid black;
+    background-color: transparent;
+    border: 1px solid #fff;
     width: 250px;
     height: 70px;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 40px;
-    background-color: transparent; }
+    font-size: 40px; }
 
 .movie {
   width: 80vw;
@@ -60,14 +67,26 @@ html {
     position: absolute;
     width: 80vw;
     z-index: 2;
-    display: flex; }
+    display: flex;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff; }
   .movie__poster {
     width: 300px;
     height: 450px;
-    margin: 23px 35px; }
+    margin: 23px 35px;
+    box-shadow: 10px 10px 5px #888888;
+    transition: all .3s;
+    opacity: .7; }
+    .movie__poster:hover {
+      transform: scale(1.05);
+      opacity: 1; }
   .movie__trailer-video {
     width: 100%;
-    height: 500px; }
+    height: 500px;
+    transition: all .3s;
+    opacity: .7; }
+    .movie__trailer-video:hover {
+      opacity: 1; }
   .movie__trailer {
     display: flex;
     justify-content: center;

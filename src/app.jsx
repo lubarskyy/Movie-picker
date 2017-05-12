@@ -95,5 +95,16 @@ class App extends React.Component {
     this.setState({language: e.target.value})
   }
 }
+document.addEventListener('DOMContentLoaded', function(){
+  ReactDOM.render(<App/>, document.querySelector('#app'))
 
-ReactDOM.render(<App/>, document.querySelector('#app'))
+  const panel = document.querySelector('.main__leftside');
+  const form = document.querySelector('.form');
+  const movies = document.querySelector('.main__movies');
+
+  panel.addEventListener('click', function(){
+    panel.style.width = '5%';
+    form.style.display = 'none';
+    movies.style.width = '100vw';
+  })
+});
