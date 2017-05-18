@@ -102,9 +102,9 @@ document.addEventListener('DOMContentLoaded', function(){
   const form = document.querySelector('.form');
   const movies = document.querySelector('.main__movies');
 
-  panel.addEventListener('click', function(){
-    panel.style.width = '5%';
-    form.style.display = 'none';
-    movies.style.width = '100vw';
-  })
+  // panel.addEventListener('click', function(){
+  //   panel.style.width = '5%';
+  //   form.style.display = 'none';
+  //   movies.style.width = '100vw';
+  // })
 });

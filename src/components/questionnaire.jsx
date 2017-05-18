@@ -22,7 +22,7 @@ class Questionnaire extends React.Component{
             <label className='form__label'>Runtime
               <Question data={this.props.runtime} dataToShow={['60', '90', '120']} handleChange={this.props.handleChangeRuntime}/>
             </label>
-            <label className='form__label'>Language  
+            <label className='form__label'>Movie language  
               <Question data={this.props.language} dataToShow={['en', 'pl']} handleChange={this.props.handleChangeLanguage}/>
             </label>
           </form>

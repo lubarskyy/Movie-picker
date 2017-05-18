@@ -27,7 +27,6 @@ class MovieSection extends React.Component {
     let randomFetchedMovies = [];
     fetch(this.state.url).then(response=>{
       response.json().then(data=>{
-        console.log(data.results)
         data.results.forEach(el=>{
           randomFetchedMovies.push(el);
         })

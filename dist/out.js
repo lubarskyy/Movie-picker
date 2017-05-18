@@ -9663,11 +9663,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var form = document.querySelector('.form');
   var movies = document.querySelector('.main__movies');
 
-  panel.addEventListener('click', function () {
-    panel.style.width = '5%';
-    form.style.display = 'none';
-    movies.style.width = '100vw';
-  });
+  // panel.addEventListener('click', function(){
+  //   panel.style.width = '5%';
+  //   form.style.display = 'none';
+  //   movies.style.width = '100vw';
+  // })
 });
 
 /***/ }),
@@ -10183,7 +10183,6 @@ var MovieSection = function (_React$Component) {
       var randomFetchedMovies = [];
       fetch(_this.state.url).then(function (response) {
         response.json().then(function (data) {
-          console.log(data.results);
           data.results.forEach(function (el) {
             randomFetchedMovies.push(el);
           });
@@ -10375,7 +10374,7 @@ var Questionnaire = function (_React$Component) {
             _react2.default.createElement(
               'label',
               { className: 'form__label' },
-              'Language',
+              'Movie language',
               _react2.default.createElement(_question2.default, { data: this.props.language, dataToShow: ['en', 'pl'], handleChange: this.props.handleChangeLanguage })
             )
           )

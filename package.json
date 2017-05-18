@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lubarskyy/movie-picker.git"
+    "url": "git+https://github.com/lubarskyy/Movie-picker.git"
   },
   "author": "Robert Lubarski",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lubarskyy/movie-picker/issues"
+    "url": "https://github.com/lubarskyy/Movie-picker/issues"
   },
-  "homepage": "https://github.com/lubarskyy/movie-picker#readme",
+  "homepage": "https://github.com/lubarskyy/Movie-picker#readme",
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
