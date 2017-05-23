@@ -9630,11 +9630,17 @@ var App = function (_React$Component) {
       _this.setState({ language: e.target.value });
     };
 
+    _this.setUrl = function () {
+      _this.setState({ url: 'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&language=en-US' + '&with_original_language=' + _this.state.language + '&primary_release_year=' + _this.state.year + '&with_runtime.lte=' + _this.state.runtime + '&with_genres=' + _this.state.genre
+      });
+    };
+
     _this.state = {
       year: '',
       genre: '',
       runtime: '',
-      language: ''
+      language: '',
+      url: ''
     };
     return _this;
   }
@@ -9671,6 +9677,7 @@ var App = function (_React$Component) {
             genre: this.state.genre,
             runtime: this.state.runtime,
             language: this.state.language,
+            handleBlur: this.setUrl,
             handleChangeYear: this.handleChangeYear,
             handleChangeGenre: this.handleChangeGenre,
             handleChangeRuntime: this.handleChangeRuntime,
@@ -9679,7 +9686,8 @@ var App = function (_React$Component) {
             year: this.state.year,
             genre: this.state.genre,
             runtime: this.state.runtime,
-            language: this.state.language })
+            language: this.state.language,
+            url: this.state.url })
         )
       );
     }
@@ -10206,14 +10214,9 @@ var MovieSection = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (MovieSection.__proto__ || Object.getPrototypeOf(MovieSection)).call(this, props));
 
-    _this.setMovies = function () {
-      _this.setState({ url: 'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&language=en-US' + '&with_original_language=' + _this.props.language + '&year=' + _this.props.year + '&with_runtime.lte=' + _this.props.runtime + '&with_genres=' + _this.props.genre
-      });
-    };
-
     _this.fetchMovies = function () {
       var randomFetchedMovies = [];
-      fetch(_this.state.url).then(function (response) {
+      fetch(_this.props.url).then(function (response) {
         response.json().then(function (data) {
           data.results.forEach(function (el) {
             randomFetchedMovies.push(el);
@@ -10234,7 +10237,6 @@ var MovieSection = function (_React$Component) {
     };
 
     _this.state = {
-      url: '',
       movies: []
     };
     return _this;
@@ -10246,17 +10248,12 @@ var MovieSection = function (_React$Component) {
       return _react2.default.createElement(
         'section',
         { className: 'main__movies' },
-        _react2.default.createElement(_randomMovie2.default, { movies: this.state.movies }),
         _react2.default.createElement(
           'button',
-          { onClick: this.setMovies },
-          'SET URL'
+          { className: 'main__button', onClick: this.fetchMovies },
+          'Show movies'
         ),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.fetchMovies },
-          'SHOW MOVIES'
-        )
+        _react2.default.createElement(_randomMovie2.default, { movies: this.state.movies })
       );
     }
   }]);
@@ -10305,7 +10302,7 @@ var Question = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'select',
-        { className: 'form__options', onChange: this.props.handleChange, value: this.props.data },
+        { className: 'form__options', onChange: this.props.handleChange, onBlur: this.props.handleBlur, value: this.props.data },
         _react2.default.createElement(
           'option',
           null,
@@ -10384,16 +10381,18 @@ var Questionnaire = function (_React$Component) {
               _react2.default.createElement(_question2.default, {
                 data: this.props.year,
                 dataToShow: ['2014', '2015', '2016', '2017'],
-                handleChange: this.props.handleChangeYear })
+                handleChange: this.props.handleChangeYear,
+                handleBlur: this.props.handleBlur })
             ),
             _react2.default.createElement(
               'label',
               { className: 'form__label' },
               'Genre',
               _react2.default.createElement(_question2.default, {
-                data: this.props.genre,
+
                 dataToShow: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'],
-                handleChange: this.props.handleChangeGenre })
+                handleChange: this.props.handleChangeGenre,
+                handleBlur: this.props.handleBlur })
             ),
             _react2.default.createElement(
               'label',
@@ -10402,7 +10401,8 @@ var Questionnaire = function (_React$Component) {
               _react2.default.createElement(_question2.default, {
                 data: this.props.runtime,
                 dataToShow: ['60', '90', '120'],
-                handleChange: this.props.handleChangeRuntime })
+                handleChange: this.props.handleChangeRuntime,
+                handleBlur: this.props.handleBlur })
             ),
             _react2.default.createElement(
               'label',
@@ -10411,7 +10411,8 @@ var Questionnaire = function (_React$Component) {
               _react2.default.createElement(_question2.default, {
                 data: this.props.language,
                 dataToShow: ['en', 'pl'],
-                handleChange: this.props.handleChangeLanguage })
+                handleChange: this.props.handleChangeLanguage,
+                handleBlur: this.props.handleBlur })
             )
           )
         )

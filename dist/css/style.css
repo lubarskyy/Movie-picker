@@ -38,39 +38,58 @@ body {
     width: 100%;
     background-color: #444d69; }
   .main__movies {
-    width: 100%; }
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px; }
   .main__questions {
     width: 100%; }
+  .main__button {
+    width: 255px;
+    height: 70px;
+    border: none;
+    background-color: #444d69;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 30px;
+    color: #fff;
+    transition: all .3s;
+    outline: none; }
+    .main__button:hover {
+      border: 2px solid #444d69;
+      background-color: transparent; }
 
 .header__content {
-  display: flex; }
+  display: flex;
+  align-items: center;
+  height: 150px; }
 
 .header__logo {
   width: 128px;
   height: 128px; }
 
 .header__title {
-  font-size: 50px; }
+  font-size: 100px;
+  margin-left: 40px; }
 
-.form {
-  width: 20vw; }
-  .form__select {
-    display: flex;
-    flex-direction: column;
-    align-items: center; }
-  .form__label {
-    display: block;
-    font-size: 30px;
-    font-weight: 600;
-    margin-top: 50px; }
-  .form__options {
-    display: block;
-    background-color: transparent;
-    border: 1px solid #fff;
-    width: 250px;
-    height: 70px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 35px; }
+.form__select {
+  display: flex;
+  justify-content: space-between; }
+
+.form__label {
+  font-size: 30px;
+  font-weight: 600;
+  margin-top: 50px; }
+
+.form__options {
+  display: block;
+  background-color: transparent;
+  border: 2px solid #444d69;
+  width: 255px;
+  height: 70px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 35px;
+  color: #fff; }
 
 .movie {
   background-size: cover;
@@ -96,12 +115,8 @@ body {
       transform: scale(1.05);
       opacity: 1; }
   .movie__trailer-video {
-    width: 100%;
+    width: calc(100% - (100% - 1080px));
     height: 500px; }
-  .movie__trailer {
-    display: flex;
-    justify-content: center;
-    width: 80vw; }
   .movie__info {
     display: flex;
     flex-direction: column;

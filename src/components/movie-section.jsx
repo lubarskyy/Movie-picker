@@ -5,27 +5,20 @@ class MovieSection extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      url: '',
       movies: [],
     }
   }
   render(){
     return (
       <section className='main__movies'>
+        <button className='main__button' onClick={this.fetchMovies}>Show movies</button>
         <RandomMovie movies={this.state.movies}/>
-        <button onClick={this.setMovies}>SET URL</button>
-        <button onClick={this.fetchMovies}>SHOW MOVIES</button>
       </section>
     )
   }
-  setMovies=()=>{
-    this.setState({url:
-      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&language=en-US'+ '&with_original_language=' + this.props.language + '&year=' + this.props.year + '&with_runtime.lte=' + this.props.runtime + '&with_genres=' + this.props.genre
-    })
-  }
   fetchMovies=()=>{
     let randomFetchedMovies = [];
-    fetch(this.state.url).then(response=>{
+    fetch(this.props.url).then(response=>{
       response.json().then(data=>{
         data.results.forEach(el=>{
           randomFetchedMovies.push(el);
