@@ -9645,10 +9645,42 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'section',
         { className: 'main' },
-        _react2.default.createElement(_questionnaire2.default, { year: this.state.year, genre: this.state.genre, runtime: this.state.runtime, language: this.state.language,
-          handleChangeYear: this.handleChangeYear, handleChangeGenre: this.handleChangeGenre,
-          handleChangeRuntime: this.handleChangeRuntime, handleChangeLanguage: this.handleChangeLanguage }),
-        _react2.default.createElement(_movieSection2.default, { year: this.state.year, genre: this.state.genre, runtime: this.state.runtime, language: this.state.language })
+        _react2.default.createElement(
+          'header',
+          { className: 'main__header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'max-width' },
+            _react2.default.createElement(
+              'div',
+              { className: 'header__content' },
+              _react2.default.createElement('img', { className: 'header__logo', src: 'images/movie-icon.png' }),
+              _react2.default.createElement(
+                'h1',
+                { className: 'header__title' },
+                'Movie Picker'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'max-width' },
+          _react2.default.createElement(_questionnaire2.default, {
+            year: this.state.year,
+            genre: this.state.genre,
+            runtime: this.state.runtime,
+            language: this.state.language,
+            handleChangeYear: this.handleChangeYear,
+            handleChangeGenre: this.handleChangeGenre,
+            handleChangeRuntime: this.handleChangeRuntime,
+            handleChangeLanguage: this.handleChangeLanguage }),
+          _react2.default.createElement(_movieSection2.default, {
+            year: this.state.year,
+            genre: this.state.genre,
+            runtime: this.state.runtime,
+            language: this.state.language })
+        )
       );
     }
   }]);
@@ -10336,13 +10368,9 @@ var Questionnaire = function (_React$Component) {
   _createClass(Questionnaire, [{
     key: 'render',
     value: function render() {
-      var genre = void 0;
-      {
-        this.props.genre == 28 ? genre = 'Action' : null;
-      }
       return _react2.default.createElement(
         'div',
-        { className: 'main__leftside' },
+        { className: 'main__questions' },
         _react2.default.createElement(
           'div',
           { className: 'form' },
@@ -10353,29 +10381,37 @@ var Questionnaire = function (_React$Component) {
               'label',
               { className: 'form__label' },
               'Production year',
-              _react2.default.createElement(_question2.default, { data: this.props.year, dataToShow: ['2014', '2015', '2016', '2017'], handleChange: this.props.handleChangeYear })
+              _react2.default.createElement(_question2.default, {
+                data: this.props.year,
+                dataToShow: ['2014', '2015', '2016', '2017'],
+                handleChange: this.props.handleChangeYear })
             ),
             _react2.default.createElement(
               'label',
               { className: 'form__label' },
               'Genre',
               _react2.default.createElement(_question2.default, {
-                data: genre,
+                data: this.props.genre,
                 dataToShow: ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'History', 'Horror', 'Music', 'Mystery', 'Romance', 'Science Fiction', 'TV Movie', 'Thriller', 'War', 'Western'],
-                handleChange: this.props.handleChangeGenre
-              })
+                handleChange: this.props.handleChangeGenre })
             ),
             _react2.default.createElement(
               'label',
               { className: 'form__label' },
               'Runtime',
-              _react2.default.createElement(_question2.default, { data: this.props.runtime, dataToShow: ['60', '90', '120'], handleChange: this.props.handleChangeRuntime })
+              _react2.default.createElement(_question2.default, {
+                data: this.props.runtime,
+                dataToShow: ['60', '90', '120'],
+                handleChange: this.props.handleChangeRuntime })
             ),
             _react2.default.createElement(
               'label',
               { className: 'form__label' },
               'Movie language',
-              _react2.default.createElement(_question2.default, { data: this.props.language, dataToShow: ['en', 'pl'], handleChange: this.props.handleChangeLanguage })
+              _react2.default.createElement(_question2.default, {
+                data: this.props.language,
+                dataToShow: ['en', 'pl'],
+                handleChange: this.props.handleChangeLanguage })
             )
           )
         )
@@ -10421,6 +10457,10 @@ var RandomMovie = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (RandomMovie.__proto__ || Object.getPrototypeOf(RandomMovie)).call(this, props));
 
+    _this.showTrailer = function (e) {
+      e.target.parentNode.parentNode.parentNode.nextSibling.classList.remove('hidden');
+    };
+
     _this.state = {
       YTid: []
     };
@@ -10441,7 +10481,8 @@ var RandomMovie = function (_React$Component) {
             null,
             _react2.default.createElement(
               'div',
-              { className: 'movie', style: { backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + el.backdrop_path + ')' } },
+              { className: 'movie',
+                style: { backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + el.backdrop_path + ')' } },
               _react2.default.createElement(
                 'div',
                 { className: 'movie__content' },
@@ -10483,12 +10524,21 @@ var RandomMovie = function (_React$Component) {
                     { className: 'movie__description' },
                     el.overview
                   )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'button',
+                    { onClick: _this2.showTrailer },
+                    'test'
+                  )
                 )
               )
             ),
             _react2.default.createElement(
               'div',
-              { className: 'movie__trailer' },
+              { className: 'movie__trailer hidden' },
               _react2.default.createElement('iframe', { className: 'movie__trailer-video', src: 'https://www.youtube.com/embed/' + _this2.state.YTid[index] })
             )
           );

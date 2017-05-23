@@ -17,10 +17,36 @@ class App extends React.Component {
   render(){
     return (
       <section className='main'>
-        <Questionnaire year={this.state.year} genre={this.state.genre} runtime={this.state.runtime} language={this.state.language}
-          handleChangeYear={this.handleChangeYear} handleChangeGenre={this.handleChangeGenre}
-          handleChangeRuntime={this.handleChangeRuntime} handleChangeLanguage={this.handleChangeLanguage}/>
-        <MovieSection year={this.state.year} genre={this.state.genre} runtime={this.state.runtime} language={this.state.language}/>
+
+        <header className='main__header'>
+          <div className='max-width'>
+            <div className='header__content'>
+              <img className='header__logo' src='images/movie-icon.png'/>
+              <h1 className='header__title'>
+                Movie Picker
+              </h1>
+            </div>
+          </div>
+        </header>
+
+        <div className='max-width'>
+          <Questionnaire
+            year={this.state.year}
+            genre={this.state.genre}
+            runtime={this.state.runtime}
+            language={this.state.language}
+            handleChangeYear={this.handleChangeYear}
+            handleChangeGenre={this.handleChangeGenre}
+            handleChangeRuntime={this.handleChangeRuntime}
+            handleChangeLanguage={this.handleChangeLanguage}/>
+
+          <MovieSection
+            year={this.state.year}
+            genre={this.state.genre}
+            runtime={this.state.runtime}
+            language={this.state.language}/>
+        </div>
+        
       </section>
     )
   }

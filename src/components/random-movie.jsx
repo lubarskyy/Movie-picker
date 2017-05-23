@@ -13,7 +13,8 @@ class RandomMovie extends React.Component {
         {this.props.movies.map((el,index)=>{
           return (
             <section>
-              <div className='movie' style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500/${el.backdrop_path})`}}>
+              <div className='movie'
+                style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500/${el.backdrop_path})`}}>
                 <div className='movie__content'>
                   <div>
                     <img className='movie__poster' src={'https://image.tmdb.org/t/p/w500/'+el.poster_path}></img>
@@ -25,9 +26,12 @@ class RandomMovie extends React.Component {
                     <p className='movie__overview'>Overview:</p>
                     <p className='movie__description'>{el.overview}</p>
                   </div>
+                  <div>
+                    <button onClick={this.showTrailer}>test</button>
+                  </div>
                 </div>
               </div>
-              <div className='movie__trailer'>
+              <div className='movie__trailer hidden'>
                 <iframe className='movie__trailer-video' src={'https://www.youtube.com/embed/'+this.state.YTid[index]}></iframe>
               </div>
             </section>
@@ -49,6 +53,9 @@ class RandomMovie extends React.Component {
         })
       })
     }
+  }
+  showTrailer=(e)=>{
+    e.target.parentNode.parentNode.parentNode.nextSibling.classList.remove('hidden');
   }
 }
 
