@@ -1,61 +1,106 @@
 import React from 'react';
+import {getMovie} from './fetch.jsx';
+import {getTrailer} from './fetch.jsx';
+import {getSimilarMovies} from './fetch.jsx';
 
 class RandomMovie extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      YTid: [],
+      movie: null,
+      youtube: null,
+      similar: null,
     }
   }
   render(){
-    return (
-      <div>
-        {this.props.movies.map((el,index)=>{
-          return (
-            <section>
-              <div className='movie'
-                style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500/${el.backdrop_path})`}}>
-                <div className='movie__content'>
-                  <div>
-                    <img className='movie__poster' src={'https://image.tmdb.org/t/p/w500/'+el.poster_path}></img>
-                  </div>
-                  <div className='movie__info'>
-                    <p className='movie__title'>{el.title}</p>
-                    <p className='movie__release'>Release date: {el.release_date}</p>
-                    <p className='movie__vote'>Rating: {el.vote_average}/10, based on {el.vote_count} votes</p>
-                    <p className='movie__overview'>Overview:</p>
-                    <p className='movie__description'>{el.overview}</p>
-                  </div>
-                  <div>
-                    <button onClick={this.showTrailer}>test</button>
-                  </div>
-                </div>
+    const movie = this.state.movie;
+
+    if(this.state.movie !== null && this.state.youtube !== null && this.state.similar !== null){
+      return (
+        <div>
+          <div className='movie'
+            style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.backdrop_path})`}}>
+
+            <div className='movie__content'>
+              <div>
+                <img className='movie__poster' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}></img>
               </div>
-              <div className='movie__trailer hidden'>
-                <iframe className='movie__trailer-video' src={'https://www.youtube.com/embed/'+this.state.YTid[index]}></iframe>
+              <div className='movie__info'>
+                <p className='movie__title'>{movie.title}</p>
+                <p className='movie__release'>Release date: {movie.release_date}</p>
+                <p className='movie__vote'>Rating: {movie.vote_average}/10, based on {movie.vote_count} votes</p>
+                <p>Runtime: {movie.runtime} minutes</p>
+                <p>Status: {movie.status}</p>
+                <p>Genres: {movie.genres.map(el=>{
+                    return <span key={el.name}>{el.name}, </span>
+                  })}</p>
+                <p className='movie__overview'>Overview:</p>
+                <p className='movie__description'>{movie.overview}</p>
               </div>
-            </section>
-          )
-        })}
-      </div>
-    )
-  }
-  componentDidUpdate() {
-    let youTubeLinks = [];
-    if(this.state.YTid.length === 0){
-      this.props.movies.map(el=>{
-        fetch('https://api.themoviedb.org/3/movie/'+el.id+'/videos?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&language=en-US')
-        .then(response=>{
-          response.json().then(data=>{
-            youTubeLinks.push(data.results[0].key)
-            this.setState({YTid: youTubeLinks})
-          })
-        })
-      })
+            </div>
+
+          </div>
+
+          <div className='movie__buttons'>
+            <button className='main__button' onClick={this.showTrailer}>Trailer</button>
+            <button className='main__button main__button--width' onClick={this.showSimilar}>Similar movies</button>
+          </div>
+
+          <div className='movie__trailer'>
+            <iframe className='movie__trailer-video hidden' src={`https://www.youtube.com/embed/${this.state.youtube}`}></iframe>
+          </div>
+
+          <div className='movie__similar'>
+            {this.state.similar.map(el=>{
+              return <img className='movie__similar-poster hidden' key={el.id} src={`https://image.tmdb.org/t/p/w500/${el.poster_path}`}></img>
+            })}
+          </div>
+
+        </div>
+      )
+    } else {
+      return null
     }
   }
+  componentDidMount() {
+    const movieId = this.props.movieId;
+
+    getMovie(movieId).then(data => {
+      this.setState({movie: data});
+    });
+
+    getTrailer(movieId).then(data => {
+      this.setState({youtube: data.results[0].key});
+    });
+
+    getSimilarMovies(movieId).then(data => {
+      this.setState({similar: data.results.splice(0,3)});
+    });
+
+  }
+  componentWillReceiveProps(nextProps) {
+
+    getMovie(nextProps.movieId).then(data => {
+      this.setState({movie: data});
+    });
+
+    getTrailer(nextProps.movieId).then(data => {
+      this.setState({youtube: data.results[0].key});
+    });
+
+    getSimilarMovies(nextProps.movieId).then(data => {
+      this.setState({similar: data.results.splice(0,3)});
+    });
+
+  }
   showTrailer=(e)=>{
-    e.target.parentNode.parentNode.parentNode.nextSibling.classList.remove('hidden');
+    e.target.parentNode.nextSibling.firstChild.classList.toggle('hidden');
+  }
+  showSimilar=(e)=>{
+    const posters = Array.from(e.target.parentNode.nextSibling.nextSibling.childNodes);
+    posters.forEach(el=>{
+      el.classList.toggle('hidden');
+    })
   }
 }
 

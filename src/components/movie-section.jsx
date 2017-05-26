@@ -5,14 +5,16 @@ class MovieSection extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      movies: [],
+      moviesId: [],
     }
   }
   render(){
     return (
       <section className='main__movies'>
         <button className='main__button' onClick={this.fetchMovies}>Show movies</button>
-        <RandomMovie movies={this.state.movies}/>
+        {this.state.moviesId.map(el=>{
+          return <RandomMovie key={el} movieId={el}/>
+        })}
       </section>
     )
   }
@@ -21,9 +23,9 @@ class MovieSection extends React.Component {
     fetch(this.props.url).then(response=>{
       response.json().then(data=>{
         data.results.forEach(el=>{
-          randomFetchedMovies.push(el);
+          randomFetchedMovies.push(el.id);
         })
-        this.setState({movies: this.shuffleArray(randomFetchedMovies).splice(0,3)})
+        this.setState({moviesId: this.shuffleArray(randomFetchedMovies).splice(0,3)})
       })
     })
   }

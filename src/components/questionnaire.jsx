@@ -4,8 +4,16 @@ import Question from './question.jsx'
 class Questionnaire extends React.Component{
   render(){
     return (
-      <div className='main__questions'>
+      <section className='main__questions'>
         <div className='form'>
+
+          <div className='form__icons'>
+            <img className='icon' src='images/production.png'/>
+            <img className='icon' src='images/genre.png'/>
+            <img className='icon' src='images/runtime.png'/>
+            <img className='icon' src='images/lang.png'/>
+          </div>
+
           <form className='form__select'>
 
             <label className='form__label'>Production year
@@ -24,7 +32,7 @@ class Questionnaire extends React.Component{
                 handleBlur={this.props.handleBlur}/>
             </label>
 
-            <label className='form__label'>Runtime
+            <label className='form__label'>Runtime(minutes)
               <Question
                 data={this.props.runtime}
                 dataToShow={['60', '90', '120']}
@@ -42,7 +50,7 @@ class Questionnaire extends React.Component{
 
           </form>
         </div>
-      </div>
+      </section>
     )
   }
 }

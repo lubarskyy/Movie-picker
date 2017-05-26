@@ -6,7 +6,7 @@ class Question extends React.Component {
       <select className='form__options' onChange={this.props.handleChange} onBlur={this.props.handleBlur} value={this.props.data}>
         <option> </option>
         {this.props.dataToShow.map(el=>{
-          return <option>{el}</option>
+          return <option key={el}>{el}</option>
         })}
       </select>
     )

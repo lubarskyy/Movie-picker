@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Questionnaire from './components/questionnaire.jsx';
 import MovieSection from './components/movie-section.jsx';
-require('../sass/style.scss')
+require('../sass/style.scss');
 
 class App extends React.Component {
   constructor(props){
@@ -125,20 +125,11 @@ class App extends React.Component {
   }
   setUrl=()=>{
     this.setState({url:
-      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&language=en-US'+ '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&with_runtime.lte=' + this.state.runtime + '&with_genres=' + this.state.genre
+      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&language=en-US'+ '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&with_runtime.lte=' + this.state.runtime + '&with_genres=' + this.state.genre
     })
   }
 }
+
 document.addEventListener('DOMContentLoaded', function(){
   ReactDOM.render(<App/>, document.querySelector('#app'))
-
-  const panel = document.querySelector('.main__leftside');
-  const form = document.querySelector('.form');
-  const movies = document.querySelector('.main__movies');
-
-  // panel.addEventListener('click', function(){
-  //   panel.style.width = '5%';
-  //   form.style.display = 'none';
-  //   movies.style.width = '100vw';
-  // })
 });
