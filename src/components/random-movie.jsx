@@ -2,6 +2,7 @@ import React from 'react';
 import {getMovie} from './fetch.jsx';
 import {getTrailer} from './fetch.jsx';
 import {getSimilarMovies} from './fetch.jsx';
+import {getCast} from './fetch.jsx';
 
 class RandomMovie extends React.Component {
   constructor(props){
@@ -10,16 +11,18 @@ class RandomMovie extends React.Component {
       movie: null,
       youtube: null,
       similar: null,
+      cast: null,
     }
   }
   render(){
     const movie = this.state.movie;
 
-    if(this.state.movie !== null && this.state.youtube !== null && this.state.similar !== null){
+    if(this.state.movie !== null && this.state.youtube !== null && this.state.similar !== null
+      && this.state.cast !== null){
       return (
         <div>
           <div className='movie'
-            style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500/${movie.backdrop_path})`}}>
+            style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1000/${movie.backdrop_path})`}}>
 
             <div className='movie__content'>
               <div>
@@ -44,6 +47,7 @@ class RandomMovie extends React.Component {
           <div className='movie__buttons'>
             <button className='main__button' onClick={this.showTrailer}>Trailer</button>
             <button className='main__button main__button--width' onClick={this.showSimilar}>Similar movies</button>
+            <button className='main__button' onClick={this.showCast}>Cast</button>
           </div>
 
           <div className='movie__trailer'>
@@ -53,6 +57,16 @@ class RandomMovie extends React.Component {
           <div className='movie__similar'>
             {this.state.similar.map(el=>{
               return <img className='movie__similar-poster hidden' key={el.id} src={`https://image.tmdb.org/t/p/w500/${el.poster_path}`}></img>
+            })}
+          </div>
+
+          <div className='movie__cast'>
+            {this.state.cast.map(el=>{
+              return (
+                <div key={el.id}>
+                  <img className='movie__similar-poster hidden' key={el.cast_id} src={`https://image.tmdb.org/t/p/w500/${el.profile_path}`}></img>
+                  <p className='hidden' key={el.name}>{el.name} as {el.character}</p>
+              </div>)
             })}
           </div>
 
@@ -77,6 +91,10 @@ class RandomMovie extends React.Component {
       this.setState({similar: data.results.splice(0,3)});
     });
 
+    getCast(movieId).then(data => {
+      this.setState({cast: data.cast.splice(0,6)});
+    });
+
   }
   componentWillReceiveProps(nextProps) {
 
@@ -92,6 +110,10 @@ class RandomMovie extends React.Component {
       this.setState({similar: data.results.splice(0,3)});
     });
 
+    getCast(movieId).then(data => {
+      this.setState({cast: data.cast.splice(0,6)});
+    });
+
   }
   showTrailer=(e)=>{
     e.target.parentNode.nextSibling.firstChild.classList.toggle('hidden');
@@ -100,6 +122,15 @@ class RandomMovie extends React.Component {
     const posters = Array.from(e.target.parentNode.nextSibling.nextSibling.childNodes);
     posters.forEach(el=>{
       el.classList.toggle('hidden');
+    })
+  }
+  showCast=(e)=>{
+    const figures = Array.from(e.target.parentNode.nextSibling.nextSibling.nextSibling.childNodes);
+    figures.forEach(el=>{
+      const content = Array.from(el.childNodes);
+      content.forEach(el=>{
+        el.classList.toggle('hidden');
+      })
     })
   }
 }

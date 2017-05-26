@@ -51,3 +51,21 @@ export const getSimilarMovies = (movieId) => {
   });
 
 };
+
+export const getCast = (movieId) => {
+
+  const fetchMovie = fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc`);
+
+  return fetchMovie.then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Fetching similar movies failed');
+    }
+  }).then(response => {
+    return response;
+  }).catch(error => {
+    console.log('Fetching data error:', error);
+  });
+
+};

@@ -10228,6 +10228,23 @@ var getSimilarMovies = exports.getSimilarMovies = function getSimilarMovies(movi
   });
 };
 
+var getCast = exports.getCast = function getCast(movieId) {
+
+  var fetchMovie = fetch('https://api.themoviedb.org/3/movie/' + movieId + '/credits?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc');
+
+  return fetchMovie.then(function (response) {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Fetching similar movies failed');
+    }
+  }).then(function (response) {
+    return response;
+  }).catch(function (error) {
+    console.log('Fetching data error:', error);
+  });
+};
+
 /***/ }),
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10532,10 +10549,21 @@ var RandomMovie = function (_React$Component) {
       });
     };
 
+    _this.showCast = function (e) {
+      var figures = Array.from(e.target.parentNode.nextSibling.nextSibling.nextSibling.childNodes);
+      figures.forEach(function (el) {
+        var content = Array.from(el.childNodes);
+        content.forEach(function (el) {
+          el.classList.toggle('hidden');
+        });
+      });
+    };
+
     _this.state = {
       movie: null,
       youtube: null,
-      similar: null
+      similar: null,
+      cast: null
     };
     return _this;
   }
@@ -10545,14 +10573,14 @@ var RandomMovie = function (_React$Component) {
     value: function render() {
       var movie = this.state.movie;
 
-      if (this.state.movie !== null && this.state.youtube !== null && this.state.similar !== null) {
+      if (this.state.movie !== null && this.state.youtube !== null && this.state.similar !== null && this.state.cast !== null) {
         return _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
             'div',
             { className: 'movie',
-              style: { backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + movie.backdrop_path + ')' } },
+              style: { backgroundImage: 'url(https://image.tmdb.org/t/p/w1000/' + movie.backdrop_path + ')' } },
             _react2.default.createElement(
               'div',
               { className: 'movie__content' },
@@ -10635,6 +10663,11 @@ var RandomMovie = function (_React$Component) {
               'button',
               { className: 'main__button main__button--width', onClick: this.showSimilar },
               'Similar movies'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'main__button', onClick: this.showCast },
+              'Cast'
             )
           ),
           _react2.default.createElement(
@@ -10647,6 +10680,24 @@ var RandomMovie = function (_React$Component) {
             { className: 'movie__similar' },
             this.state.similar.map(function (el) {
               return _react2.default.createElement('img', { className: 'movie__similar-poster hidden', key: el.id, src: 'https://image.tmdb.org/t/p/w500/' + el.poster_path });
+            })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'movie__cast' },
+            this.state.cast.map(function (el) {
+              return _react2.default.createElement(
+                'div',
+                { key: el.id },
+                _react2.default.createElement('img', { className: 'movie__similar-poster hidden', key: el.cast_id, src: 'https://image.tmdb.org/t/p/w500/' + el.profile_path }),
+                _react2.default.createElement(
+                  'p',
+                  { className: 'hidden', key: el.name },
+                  el.name,
+                  ' as ',
+                  el.character
+                )
+              );
             })
           )
         );
@@ -10671,6 +10722,10 @@ var RandomMovie = function (_React$Component) {
 
       (0, _fetch.getSimilarMovies)(movieId).then(function (data) {
         _this2.setState({ similar: data.results.splice(0, 3) });
+      });
+
+      (0, _fetch.getCast)(movieId).then(function (data) {
+        _this2.setState({ cast: data.cast.splice(0, 6) });
       });
     }
   }, {
