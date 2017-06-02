@@ -3,6 +3,9 @@ import {getMovie} from './fetch.jsx';
 import {getTrailer} from './fetch.jsx';
 import {getSimilarMovies} from './fetch.jsx';
 import {getCast} from './fetch.jsx';
+import Trailer from './trailer.jsx';
+import Similar from './similar.jsx';
+import Cast from './cast.jsx';
 
 class RandomMovie extends React.Component {
   constructor(props){
@@ -17,8 +20,7 @@ class RandomMovie extends React.Component {
   render(){
     const movie = this.state.movie;
 
-    if(this.state.movie !== null && this.state.youtube !== null && this.state.similar !== null
-      && this.state.cast !== null){
+    if(this.state.movie !== null && this.state.similar !== null && this.state.cast !== null){
       return (
         <div>
           <div className='movie'
@@ -50,25 +52,9 @@ class RandomMovie extends React.Component {
             <button className='main__button' onClick={this.showCast}>Cast</button>
           </div>
 
-          <div className='movie__trailer'>
-            <iframe className='movie__trailer-video hidden' src={`https://www.youtube.com/embed/${this.state.youtube}`}></iframe>
-          </div>
-
-          <div className='movie__similar'>
-            {this.state.similar.map(el=>{
-              return <img className='movie__similar-poster hidden' key={el.id} src={`https://image.tmdb.org/t/p/w500/${el.poster_path}`}></img>
-            })}
-          </div>
-
-          <div className='movie__cast'>
-            {this.state.cast.map(el=>{
-              return (
-                <div key={el.id}>
-                  <img className='movie__similar-poster hidden' key={el.cast_id} src={`https://image.tmdb.org/t/p/w500/${el.profile_path}`}></img>
-                  <p className='hidden' key={el.name}>{el.name} as {el.character}</p>
-              </div>)
-            })}
-          </div>
+          <Trailer youtube={this.state.youtube}/>
+          <Similar similar={this.state.similar}/>
+          <Cast cast={this.state.cast}/>
 
         </div>
       )
@@ -110,7 +96,7 @@ class RandomMovie extends React.Component {
       this.setState({similar: data.results.splice(0,3)});
     });
 
-    getCast(movieId).then(data => {
+    getCast(nextProps.movieId).then(data => {
       this.setState({cast: data.cast.splice(0,6)});
     });
 

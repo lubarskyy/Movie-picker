@@ -22,11 +22,10 @@ class MovieSection extends React.Component {
     let randomFetchedMovies = [];
     fetch(this.props.url).then(response=>{
       response.json().then(data=>{
-        console.log(data.total_pages);
         data.results.forEach(el=>{
           randomFetchedMovies.push(el.id);
         })
-        this.setState({moviesId: this.shuffleArray(randomFetchedMovies).splice(0,3)})
+        this.setState({moviesId: this.shuffleArray(randomFetchedMovies).splice(0,3)});
       })
     })
   }

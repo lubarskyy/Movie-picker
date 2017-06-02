@@ -3,6 +3,10 @@ import Question from './question.jsx'
 
 class Questionnaire extends React.Component{
   render(){
+    const years = [];
+    for(var i = 2017; i >= 1980; i--){
+      years.push(i);
+    }
     return (
       <section className='main__questions'>
         <div className='form'>
@@ -19,7 +23,7 @@ class Questionnaire extends React.Component{
             <label className='form__label'>Production year
               <Question
                 data={this.props.year}
-                dataToShow={['2014', '2015', '2016', '2017']}
+                dataToShow={years}
                 handleChange={this.props.handleChangeYear}
                 handleBlur={this.props.handleBlur}/>
             </label>
@@ -34,15 +38,15 @@ class Questionnaire extends React.Component{
 
             <label className='form__label'>Runtime(minutes)
               <Question
-                data={this.props.runtime}
-                dataToShow={['60', '90', '120']}
+
+                dataToShow={['60 or less', '60 - 90', '120 or more']}
                 handleChange={this.props.handleChangeRuntime}
                 handleBlur={this.props.handleBlur}/>
             </label>
 
             <label className='form__label'>Movie language
               <Question
-                
+
                 dataToShow={['English', 'Polish']}
                 handleChange={this.props.handleChangeLanguage}
                 handleBlur={this.props.handleBlur}/>

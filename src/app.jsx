@@ -13,6 +13,7 @@ class App extends React.Component {
       year: '',
       genre: '',
       runtime: '',
+      dir: '',
       language: '',
       page: 1,
       url: '',
@@ -114,7 +115,20 @@ class App extends React.Component {
     }
   }
   handleChangeRuntime=(e)=>{
-    this.setState({runtime: e.target.value})
+    switch(e.target.value){
+      case '60 or less':
+        this.setState({runtime: 60});
+        this.setState({dir: 'lte='});
+        break;
+      case '60 - 90':
+        this.setState({runtime: 90});
+        this.setState({dir: 'lte='});
+        break;
+      case '120 or more':
+        this.setState({runtime: 120});
+        this.setState({dir: 'gte='});
+        break;
+    }
   }
   handleChangeLanguage=(e)=>{
     switch(e.target.value){
@@ -128,7 +142,7 @@ class App extends React.Component {
   }
   setUrl=()=>{
     this.setState({url:
-      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&language=en-US' + '&page=' + this.state.page + '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.lte=' + this.state.runtime + '&with_genres=' + this.state.genre
+      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&language=en-US' + '&page=' + this.state.page + '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.' + this.state.dir + this.state.runtime + '&with_genres=' + this.state.genre
     })
   }
 }

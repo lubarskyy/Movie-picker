@@ -9631,7 +9631,20 @@ var App = function (_React$Component) {
     };
 
     _this.handleChangeRuntime = function (e) {
-      _this.setState({ runtime: e.target.value });
+      switch (e.target.value) {
+        case '60 or less':
+          _this.setState({ runtime: 60 });
+          _this.setState({ dir: 'lte=' });
+          break;
+        case '60 - 90':
+          _this.setState({ runtime: 90 });
+          _this.setState({ dir: 'lte=' });
+          break;
+        case '120 or more':
+          _this.setState({ runtime: 120 });
+          _this.setState({ dir: 'gte=' });
+          break;
+      }
     };
 
     _this.handleChangeLanguage = function (e) {
@@ -9646,7 +9659,7 @@ var App = function (_React$Component) {
     };
 
     _this.setUrl = function () {
-      _this.setState({ url: 'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&language=en-US' + '&page=' + _this.state.page + '&with_original_language=' + _this.state.language + '&primary_release_year=' + _this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.lte=' + _this.state.runtime + '&with_genres=' + _this.state.genre
+      _this.setState({ url: 'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&language=en-US' + '&page=' + _this.state.page + '&with_original_language=' + _this.state.language + '&primary_release_year=' + _this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.' + _this.state.dir + _this.state.runtime + '&with_genres=' + _this.state.genre
       });
     };
 
@@ -9654,6 +9667,7 @@ var App = function (_React$Component) {
       year: '',
       genre: '',
       runtime: '',
+      dir: '',
       language: '',
       page: 1,
       url: ''
@@ -10282,7 +10296,7 @@ var Footer = function (_React$Component) {
   _createClass(Footer, [{
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('footer', { className: 'main__header' });
+      return _react2.default.createElement('footer', { className: 'main__footer' });
     }
   }]);
 
@@ -10395,7 +10409,6 @@ var MovieSection = function (_React$Component) {
       var randomFetchedMovies = [];
       fetch(_this.props.url).then(function (response) {
         response.json().then(function (data) {
-          console.log(data.total_pages);
           data.results.forEach(function (el) {
             randomFetchedMovies.push(el.id);
           });
@@ -10483,11 +10496,7 @@ var Question = function (_React$Component) {
       return _react2.default.createElement(
         'select',
         { className: 'form__options', onChange: this.props.handleChange, onBlur: this.props.handleBlur, value: this.props.data },
-        _react2.default.createElement(
-          'option',
-          null,
-          ' '
-        ),
+        _react2.default.createElement('option', null),
         this.props.dataToShow.map(function (el) {
           return _react2.default.createElement(
             'option',
@@ -10545,6 +10554,10 @@ var Questionnaire = function (_React$Component) {
   _createClass(Questionnaire, [{
     key: 'render',
     value: function render() {
+      var years = [];
+      for (var i = 2017; i >= 1980; i--) {
+        years.push(i);
+      }
       return _react2.default.createElement(
         'section',
         { className: 'main__questions' },
@@ -10568,7 +10581,7 @@ var Questionnaire = function (_React$Component) {
               'Production year',
               _react2.default.createElement(_question2.default, {
                 data: this.props.year,
-                dataToShow: ['2014', '2015', '2016', '2017'],
+                dataToShow: years,
                 handleChange: this.props.handleChangeYear,
                 handleBlur: this.props.handleBlur })
             ),
@@ -10587,8 +10600,8 @@ var Questionnaire = function (_React$Component) {
               { className: 'form__label' },
               'Runtime(minutes)',
               _react2.default.createElement(_question2.default, {
-                data: this.props.runtime,
-                dataToShow: ['60', '90', '120'],
+
+                dataToShow: ['60 or less', '60 - 90', '120 or more'],
                 handleChange: this.props.handleChangeRuntime,
                 handleBlur: this.props.handleBlur })
             ),
@@ -10631,6 +10644,18 @@ var _react = __webpack_require__(17);
 var _react2 = _interopRequireDefault(_react);
 
 var _fetch = __webpack_require__(83);
+
+var _trailer = __webpack_require__(196);
+
+var _trailer2 = _interopRequireDefault(_trailer);
+
+var _similar = __webpack_require__(197);
+
+var _similar2 = _interopRequireDefault(_similar);
+
+var _cast = __webpack_require__(198);
+
+var _cast2 = _interopRequireDefault(_cast);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10683,7 +10708,7 @@ var RandomMovie = function (_React$Component) {
     value: function render() {
       var movie = this.state.movie;
 
-      if (this.state.movie !== null && this.state.youtube !== null && this.state.similar !== null && this.state.cast !== null) {
+      if (this.state.movie !== null && this.state.similar !== null && this.state.cast !== null) {
         return _react2.default.createElement(
           'div',
           null,
@@ -10780,36 +10805,9 @@ var RandomMovie = function (_React$Component) {
               'Cast'
             )
           ),
-          _react2.default.createElement(
-            'div',
-            { className: 'movie__trailer' },
-            _react2.default.createElement('iframe', { className: 'movie__trailer-video hidden', src: 'https://www.youtube.com/embed/' + this.state.youtube })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'movie__similar' },
-            this.state.similar.map(function (el) {
-              return _react2.default.createElement('img', { className: 'movie__similar-poster hidden', key: el.id, src: 'https://image.tmdb.org/t/p/w500/' + el.poster_path });
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'movie__cast' },
-            this.state.cast.map(function (el) {
-              return _react2.default.createElement(
-                'div',
-                { key: el.id },
-                _react2.default.createElement('img', { className: 'movie__similar-poster hidden', key: el.cast_id, src: 'https://image.tmdb.org/t/p/w500/' + el.profile_path }),
-                _react2.default.createElement(
-                  'p',
-                  { className: 'hidden', key: el.name },
-                  el.name,
-                  ' as ',
-                  el.character
-                )
-              );
-            })
-          )
+          _react2.default.createElement(_trailer2.default, { youtube: this.state.youtube }),
+          _react2.default.createElement(_similar2.default, { similar: this.state.similar }),
+          _react2.default.createElement(_cast2.default, { cast: this.state.cast })
         );
       } else {
         return null;
@@ -10855,7 +10853,7 @@ var RandomMovie = function (_React$Component) {
         _this3.setState({ similar: data.results.splice(0, 3) });
       });
 
-      (0, _fetch.getCast)(movieId).then(function (data) {
+      (0, _fetch.getCast)(nextProps.movieId).then(function (data) {
         _this3.setState({ cast: data.cast.splice(0, 6) });
       });
     }
@@ -23342,6 +23340,198 @@ module.exports = traverseAllChildren;
 __webpack_require__(82);
 module.exports = __webpack_require__(81);
 
+
+/***/ }),
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(17);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Trailer = function (_React$Component) {
+  _inherits(Trailer, _React$Component);
+
+  function Trailer() {
+    _classCallCheck(this, Trailer);
+
+    return _possibleConstructorReturn(this, (Trailer.__proto__ || Object.getPrototypeOf(Trailer)).apply(this, arguments));
+  }
+
+  _createClass(Trailer, [{
+    key: 'render',
+    value: function render() {
+      if (this.props.youtube !== null) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'movie__trailer' },
+          _react2.default.createElement('iframe', { className: 'movie__trailer-video hidden', src: 'https://www.youtube.com/embed/' + this.props.youtube })
+        );
+      } else {
+        return null;
+      }
+    }
+  }]);
+
+  return Trailer;
+}(_react2.default.Component);
+
+exports.default = Trailer;
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(17);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _randomMovie = __webpack_require__(89);
+
+var _randomMovie2 = _interopRequireDefault(_randomMovie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Similar = function (_React$Component) {
+  _inherits(Similar, _React$Component);
+
+  function Similar() {
+    _classCallCheck(this, Similar);
+
+    return _possibleConstructorReturn(this, (Similar.__proto__ || Object.getPrototypeOf(Similar)).apply(this, arguments));
+  }
+
+  _createClass(Similar, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'movie__similar' },
+        this.props.similar.map(function (el) {
+          return _react2.default.createElement('img', { className: 'movie__similar-poster hidden', key: el.id, src: 'https://image.tmdb.org/t/p/w500/' + el.poster_path });
+        })
+      );
+    }
+  }]);
+
+  return Similar;
+}(_react2.default.Component);
+
+exports.default = Similar;
+
+/***/ }),
+/* 198 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(17);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cast = function (_React$Component) {
+  _inherits(Cast, _React$Component);
+
+  function Cast() {
+    _classCallCheck(this, Cast);
+
+    return _possibleConstructorReturn(this, (Cast.__proto__ || Object.getPrototypeOf(Cast)).apply(this, arguments));
+  }
+
+  _createClass(Cast, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'movie__cast' },
+        this.props.cast.map(function (el) {
+          if (el.profile_path !== null) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'movie__cast-container', key: el.id },
+              _react2.default.createElement('img', { className: 'movie__similar-poster hidden', key: el.cast_id, src: 'https://image.tmdb.org/t/p/w500/' + el.profile_path }),
+              _react2.default.createElement(
+                'p',
+                { className: 'hidden', key: el.name },
+                el.name,
+                ' as ',
+                el.character
+              )
+            );
+          } else {
+            return _react2.default.createElement(
+              'div',
+              { className: 'movie__cast-container', key: el.id },
+              _react2.default.createElement('img', { className: 'movie__similar-poster hidden', key: el.cast_id, src: 'images/no-image.png' }),
+              _react2.default.createElement(
+                'p',
+                { className: 'hidden', key: el.name },
+                el.name,
+                ' as ',
+                el.character
+              )
+            );
+          }
+        })
+      );
+    }
+  }]);
+
+  return Cast;
+}(_react2.default.Component);
+
+exports.default = Cast;
 
 /***/ })
 /******/ ]);

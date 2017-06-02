@@ -33,10 +33,12 @@ body {
   color: #fff;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300; }
-  .main__header {
+  .main__header, .main__footer {
     height: 150px;
     width: 100%;
     background-color: #444d69; }
+  .main__footer {
+    margin-top: calc(100vh - 300px - 406px); }
   .main__movies {
     width: 100%;
     display: flex;
@@ -63,6 +65,7 @@ body {
 
 .header__content {
   display: flex;
+  justify-content: center;
   align-items: center;
   height: 150px; }
 
@@ -84,6 +87,7 @@ body {
   justify-content: space-between; }
 
 .form__label {
+  text-align: center;
   font-size: 30px;
   font-weight: 600; }
 
@@ -158,9 +162,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     text-align: center; }
+    .movie__cast-container {
+      width: 33%; }
 
 .hidden {
-  display: none; }
+  height: 0;
+  opacity: 0;
+  margin-top: -50px; }
 
 .icon {
   width: 128px;
