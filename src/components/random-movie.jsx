@@ -20,6 +20,13 @@ class RandomMovie extends React.Component {
   render(){
     const movie = this.state.movie;
 
+    let poster;
+    if(this.state.movie !== null && movie.poster_path !== null){
+      poster = <img className='movie__poster' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}></img>
+    } else {
+      poster = <img className='movie__poster' src='images/no-image.png'></img>
+    }
+
     if(this.state.movie !== null && this.state.similar !== null && this.state.cast !== null){
       return (
         <div>
@@ -28,7 +35,7 @@ class RandomMovie extends React.Component {
 
             <div className='movie__content'>
               <div>
-                <img className='movie__poster' src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}></img>
+                {poster}
               </div>
               <div className='movie__info'>
                 <p className='movie__title'>{movie.title}</p>

@@ -38,6 +38,9 @@ body {
     width: 100%;
     background-color: #444d69; }
   .main__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: calc(100vh - 300px - 406px); }
   .main__movies {
     width: 100%;
@@ -62,6 +65,9 @@ body {
       background-color: transparent; }
     .main__button--width {
       width: 300px; }
+
+.footer__image {
+  width: 200px; }
 
 .header__content {
   display: flex;

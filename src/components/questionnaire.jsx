@@ -39,7 +39,7 @@ class Questionnaire extends React.Component{
             <label className='form__label'>Runtime(minutes)
               <Question
 
-                dataToShow={['60 or less', '60 - 90', '120 or more']}
+                dataToShow={['60 or less', '60 - 90', '90 - 120', '120 or more']}
                 handleChange={this.props.handleChangeRuntime}
                 handleBlur={this.props.handleBlur}/>
             </label>

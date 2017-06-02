@@ -124,6 +124,10 @@ class App extends React.Component {
         this.setState({runtime: 90});
         this.setState({dir: 'lte='});
         break;
+      case '90 - 120':
+        this.setState({runtime: 120});
+        this.setState({dir: 'lte='});
+        break;
       case '120 or more':
         this.setState({runtime: 120});
         this.setState({dir: 'gte='});

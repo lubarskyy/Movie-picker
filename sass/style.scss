@@ -25,6 +25,9 @@ body {
     background-color: rgb(68, 77, 105);
   }
   &__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: calc(100vh - 300px - 406px);
   }
   &__movies {
@@ -54,6 +57,12 @@ body {
     &--width {
       width: 300px;
     }
+  }
+}
+
+.footer {
+  &__image {
+    width: 200px;
   }
 }
 
