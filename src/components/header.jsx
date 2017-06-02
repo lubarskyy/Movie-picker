@@ -6,7 +6,7 @@ class Header extends React.Component {
       <header className='main__header'>
         <div className='max-width'>
           <div className='header__content'>
-            <img className='header__logo' src='images/movie-icon.png'/>
+            <a href='/movie-picker'><img className='header__logo' src='images/movie-icon.png'/></a>
             <h1 className='header__title'>
               Movie Picker
             </h1>

@@ -29,8 +29,8 @@ class RandomMovie extends React.Component {
 
     if(this.state.movie !== null && this.state.similar !== null && this.state.cast !== null){
       return (
-        <div>
-          <div className='movie'
+        <div className='movie'>
+          <div className='movie__section'
             style={{backgroundImage: `url(https://image.tmdb.org/t/p/w1000/${movie.backdrop_path})`}}>
 
             <div className='movie__content'>

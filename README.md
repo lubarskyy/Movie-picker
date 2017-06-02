@@ -12,4 +12,5 @@ Live demo - http://lubarski.pl/movie-picker
 * Webpack
 
 # Credits
-This whole application is running thanks to TMDb - The Movie Database API, be sure to visit https://www.themoviedb.org/
+* This whole application is running thanks to TMDb - The Movie Database API, be sure to visit https://www.themoviedb.org/.
+* Icon made by Freepik from http://www.flaticon.com

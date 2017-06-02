@@ -1,0 +1,25 @@
+@media (min-width: 1024px) and (max-width: 1100px) {
+
+  .max-width {
+    max-width: 1024px;
+  }
+
+  .header {
+    &__title {
+      font-size: 5.25em;
+    }
+  }
+
+  .movie {
+    &__content {
+      &::before {
+        width: 100%;
+      }
+    }
+    &__trailer {
+      &-video {
+        width: 100%;
+      }
+    }
+  }
+}

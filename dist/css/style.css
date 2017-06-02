@@ -25,6 +25,20 @@ body {
   width: 100%;
   margin: 0 auto; }
 
+.header__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; }
+
+.header__logo {
+  width: 128px;
+  height: 128px; }
+
+.header__title {
+  font-size: 6.25em;
+  margin-left: 40px; }
+
 .main {
   display: flex;
   flex-direction: column;
@@ -51,7 +65,7 @@ body {
   .main__questions {
     width: 100%; }
   .main__button {
-    width: 255px;
+    width: 25%;
     height: 70px;
     border: 2px solid #444d69;
     background-color: #444d69;
@@ -64,33 +78,18 @@ body {
     .main__button:hover {
       background-color: transparent; }
     .main__button--width {
-      width: 300px; }
-
-.footer__image {
-  width: 200px; }
-
-.header__content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 150px; }
-
-.header__logo {
-  width: 128px;
-  height: 128px; }
-
-.header__title {
-  font-size: 100px;
-  margin-left: 40px; }
-
-.form__icons {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 50px; }
+      width: 50%; }
 
 .form__select {
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-around;
+  flex-wrap: wrap; }
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px; }
 
 .form__label {
   text-align: center;
@@ -111,8 +110,10 @@ body {
     background-color: #444d69; }
 
 .movie {
-  background-size: cover;
-  margin: 20px 0 20px 0; }
+  width: 100%; }
+  .movie__section {
+    background-size: cover;
+    margin: 20px 0 20px 0; }
   .movie__content {
     position: relative;
     display: flex; }
@@ -131,12 +132,12 @@ body {
     .movie__poster:hover {
       transform: scale(1.05);
       opacity: 1; }
-  .movie__trailer-video {
-    width: calc(100% - (100% - 1080px));
-    height: 500px;
-    transition: all .7s; }
   .movie__trailer {
     margin-top: 25px; }
+    .movie__trailer-video {
+      width: calc(100% - (100% - 1080px));
+      height: 500px;
+      transition: all .7s; }
   .movie__info {
     display: flex;
     flex-direction: column;
@@ -151,14 +152,15 @@ body {
     font-weight: 400;
     margin: 50px 0 25px 0; }
   .movie__description {
-    font-size: 20px;
+    font-size: 1.25em;
     margin-bottom: 25px; }
   .movie__similar {
-    display: flex; }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; }
     .movie__similar-poster {
       width: 300px;
       height: 450px;
-      margin: 23px 25px;
       transition: all .3s;
       opacity: .7; }
       .movie__similar-poster:hover {
@@ -166,10 +168,19 @@ body {
         opacity: 1; }
   .movie__cast {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
     text-align: center; }
     .movie__cast-container {
       width: 33%; }
+
+.footer__image {
+  width: 200px;
+  margin-right: 25px; }
+
+.footer__link {
+  text-decoration: none;
+  color: #de5766; }
 
 .hidden {
   height: 0;
@@ -182,3 +193,57 @@ body {
   .icon--small {
     width: 64px;
     height: 64px; }
+
+@media (max-width: 425px) {
+  .max-width {
+    max-width: 425px; }
+  .header__title {
+    font-size: 3em;
+    margin-left: 0; }
+  .form__container {
+    width: 100%; }
+  .main__button {
+    width: 50%; }
+  .movie__content {
+    flex-wrap: wrap;
+    justify-content: center; }
+    .movie__content::before {
+      width: 100%; }
+  .movie__description {
+    font-size: 1em; }
+  .movie__info {
+    margin: 0 0 0 10px; }
+  .movie__trailer-video {
+    width: 100%; }
+  .movie__cast-container {
+    width: 100%; }
+  .movie__similar-poster {
+    margin-bottom: 10px; } }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .max-width {
+    max-width: 768px; }
+  .header__title {
+    font-size: 4.25em; }
+  .form__container {
+    width: 50%; }
+  .movie__content::before {
+    width: 100%; }
+  .movie__trailer-video {
+    width: 100%; }
+  .movie__cast-container {
+    width: 50%; }
+  .movie__description {
+    font-size: 1em; }
+  .movie__similar-poster {
+    margin-bottom: 10px; } }
+
+@media (min-width: 1024px) and (max-width: 1100px) {
+  .max-width {
+    max-width: 1024px; }
+  .header__title {
+    font-size: 5.25em; }
+  .movie__content::before {
+    width: 100%; }
+  .movie__trailer-video {
+    width: 100%; } }

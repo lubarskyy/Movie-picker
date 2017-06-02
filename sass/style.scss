@@ -11,6 +11,23 @@ body {
   margin: 0 auto;
 }
 
+.header {
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+  }
+  &__logo {
+    width: 128px;
+    height: 128px;
+  }
+  &__title {
+    font-size: 6.25em;
+    margin-left: 40px;
+  }
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -41,7 +58,7 @@ body {
     width: 100%;
   }
   &__button {
-    width: 255px;
+    width: 25%;
     height: 70px;
     border: 2px solid rgb(68, 77, 105);
     background-color: rgb(68, 77, 105);
@@ -55,44 +72,23 @@ body {
       background-color: transparent;
     }
     &--width {
-      width: 300px;
+      width: 50%;
     }
-  }
-}
-
-.footer {
-  &__image {
-    width: 200px;
-  }
-}
-
-.header {
-  &__content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-  }
-  &__logo {
-    width: 128px;
-    height: 128px;
-  }
-  &__title {
-    font-size: 100px;
-    margin-left: 40px;
   }
 }
 
 .form {
   // width: 20vw;
-  &__icons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
-  }
   &__select {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
   }
   &__label {
     text-align: center;
@@ -116,14 +112,13 @@ body {
 }
 
 .movie {
-  // width: 80vw;
-  // height: 500px;
-  background-size: cover;
-  margin: 20px 0 20px 0;
-
+  width: 100%;
+  &__section {
+    background-size: cover;
+    margin: 20px 0 20px 0;
+  }
   &__content {
     position: relative;
-    // z-index: 2;
     display: flex;
     &::before {
       content: '';
@@ -131,7 +126,6 @@ body {
       position: absolute;
       height: 100%;
       width: calc(100% - (100% - 1080px));
-      // z-index: 1;
     }
   }
   &__poster {
@@ -145,16 +139,13 @@ body {
       opacity: 1;
     }
   }
-  &__trailer-video {
-    width: calc(100% - (100% - 1080px));
-    height: 500px;
-    transition: all .7s;
-  }
   &__trailer {
     margin-top: 25px;
-    // display: flex;
-    // justify-content: center;
-    // width: 80vw;
+    &-video {
+      width: calc(100% - (100% - 1080px));
+      height: 500px;
+      transition: all .7s;
+    }
   }
   &__info {
     display: flex;
@@ -173,15 +164,16 @@ body {
     margin: 50px 0 25px 0;
   }
   &__description {
-    font-size: 20px;
+    font-size: 1.25em;
     margin-bottom: 25px;
   }
   &__similar {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     &-poster {
       width: 300px;
       height: 450px;
-      margin: 23px 25px;
       transition: all .3s;
       opacity: .7;
       &:hover {
@@ -192,6 +184,7 @@ body {
   }
   &__cast {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
     text-align: center;
     &-container {
@@ -200,11 +193,21 @@ body {
   }
 }
 
+.footer {
+  &__image {
+    width: 200px;
+    margin-right: 25px;
+  }
+  &__link {
+    text-decoration: none;
+    color: rgb(222, 87, 102);
+  }
+}
+
 .hidden {
   height: 0;
   opacity: 0;
   margin-top: -50px;
-  // display: none;
 }
 
 .icon {
@@ -215,3 +218,7 @@ body {
     height: 64px;
   }
 }
+
+@import './mq/425px';
+@import './mq/768px';
+@import './mq/1024px';

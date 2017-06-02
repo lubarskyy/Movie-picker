@@ -1,0 +1,56 @@
+@media (max-width: 425px) {
+
+  .max-width {
+    max-width: 425px;
+  }
+
+  .header {
+    &__title {
+      font-size: 3em;
+      margin-left: 0;
+    }
+  }
+
+  .form {
+    &__container {
+      width: 100%;
+    }
+  }
+
+  .main {
+    &__button {
+      width: 50%;
+    }
+  }
+
+  .movie {
+    &__content {
+      flex-wrap: wrap;
+      justify-content: center;
+      &::before {
+        width: 100%;
+      }
+    }
+    &__description {
+      font-size: 1em;
+    }
+    &__info {
+      margin: 0 0 0 10px;
+    }
+    &__trailer {
+      &-video {
+        width: 100%;
+      }
+    }
+    &__cast {
+      &-container {
+        width: 100%;
+      }
+    }
+    &__similar {
+      &-poster {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

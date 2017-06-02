@@ -9,7 +9,10 @@ class Trailer extends React.Component {
         </div>
       )
     } else {
-      return null
+      return (
+        <div className='movie__trailer'>
+        </div>
+      )
     }
   }
 }
