@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Questionnaire from './components/questionnaire.jsx';
 import MovieSection from './components/movie-section.jsx';
+import Header from './components/header.jsx';
+import Footer from './components/footer.jsx';
 require('../sass/style.scss');
 
 class App extends React.Component {
@@ -12,25 +14,17 @@ class App extends React.Component {
       genre: '',
       runtime: '',
       language: '',
+      page: 1,
       url: '',
     }
   }
   render(){
     return (
-      <section className='main'>
+      <div className='main'>
 
-        <header className='main__header'>
-          <div className='max-width'>
-            <div className='header__content'>
-              <img className='header__logo' src='images/movie-icon.png'/>
-              <h1 className='header__title'>
-                Movie Picker
-              </h1>
-            </div>
-          </div>
-        </header>
+        <Header/>
 
-        <div className='max-width'>
+        <main className='max-width'>
           <Questionnaire
             year={this.state.year}
             genre={this.state.genre}
@@ -48,9 +42,11 @@ class App extends React.Component {
             runtime={this.state.runtime}
             language={this.state.language}
             url={this.state.url}/>
-        </div>
+        </main>
 
-      </section>
+        <Footer/>
+
+      </div>
     )
   }
   handleChangeYear=(e)=>{
@@ -121,11 +117,18 @@ class App extends React.Component {
     this.setState({runtime: e.target.value})
   }
   handleChangeLanguage=(e)=>{
-    this.setState({language: e.target.value})
+    switch(e.target.value){
+      case 'English':
+        this.setState({language: 'en'});
+        break;
+      case 'Polish':
+        this.setState({language: 'pl'});
+        break;
+    }
   }
   setUrl=()=>{
     this.setState({url:
-      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&page=1&language=en-US'+ '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&with_runtime.lte=' + this.state.runtime + '&with_genres=' + this.state.genre
+      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&language=en-US' + '&page=' + this.state.page + '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.lte=' + this.state.runtime + '&with_genres=' + this.state.genre
     })
   }
 }

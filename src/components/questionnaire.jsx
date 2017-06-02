@@ -42,8 +42,8 @@ class Questionnaire extends React.Component{
 
             <label className='form__label'>Movie language
               <Question
-                data={this.props.language}
-                dataToShow={['en', 'pl']}
+                
+                dataToShow={['English', 'Polish']}
                 handleChange={this.props.handleChangeLanguage}
                 handleBlur={this.props.handleBlur}/>
             </label>
