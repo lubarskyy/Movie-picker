@@ -6885,11 +6885,11 @@ var RandomMovie = function (_React$Component) {
       });
 
       (0, _fetch.getSimilarMovies)(movieId).then(function (data) {
-        _this2.setState({ similar: data.results.splice(0, 3) });
+        _this2.setState({ similar: data.results.splice(0, 10) });
       });
 
       (0, _fetch.getCast)(movieId).then(function (data) {
-        _this2.setState({ cast: data.cast.splice(0, 6) });
+        _this2.setState({ cast: data.cast.splice(0, 10) });
       });
     }
   }, {
@@ -10790,7 +10790,7 @@ var MovieSection = function (_React$Component) {
         { className: 'main__movies' },
         _react2.default.createElement(
           'button',
-          { className: 'main__button', onClick: this.fetchMovies },
+          { className: 'main__button main__button--margin', onClick: this.fetchMovies },
           'Show movies'
         ),
         this.state.moviesId.map(function (el) {

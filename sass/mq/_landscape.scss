@@ -1,4 +1,4 @@
-@media (min-width: 425px) and (max-width: 767px) {
+@media (orientation: landscape) and (max-width: 760px) {
 
   .max-width {
     max-width: 425px;
@@ -6,8 +6,12 @@
 
   .header {
     &__title {
-      font-size: 3em;
+      font-size: 2.5em;
       margin-left: 0;
+    }
+    &__logo {
+      width: 96px;
+      height: 96px;
     }
   }
 
@@ -20,6 +24,10 @@
   .main {
     &__button {
       width: 50%;
+      font-size: 1.4em;
+      &--margin {
+        margin-bottom: calc(100vh - 250px);
+      }
     }
   }
 
@@ -52,5 +60,10 @@
         margin-bottom: 10px;
       }
     }
+  }
+
+  .icon {
+    width: 96px;
+    height: 96px;
   }
 }

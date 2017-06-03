@@ -81,11 +81,11 @@ class RandomMovie extends React.Component {
     });
 
     getSimilarMovies(movieId).then(data => {
-      this.setState({similar: data.results.splice(0,3)});
+      this.setState({similar: data.results.splice(0,10)});
     });
 
     getCast(movieId).then(data => {
-      this.setState({cast: data.cast.splice(0,6)});
+      this.setState({cast: data.cast.splice(0,10)});
     });
 
   }

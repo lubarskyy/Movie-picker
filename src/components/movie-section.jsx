@@ -11,7 +11,7 @@ class MovieSection extends React.Component {
   render(){
     return (
       <section className='main__movies'>
-        <button className='main__button' onClick={this.fetchMovies}>Show movies</button>
+        <button className='main__button main__button--margin' onClick={this.fetchMovies}>Show movies</button>
         {this.state.moviesId.map(el=>{
           return <RandomMovie key={el} movieId={el}/>
         })}

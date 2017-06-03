@@ -43,6 +43,7 @@ body {
   }
   &__footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
   }
@@ -52,7 +53,6 @@ body {
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: calc(100vh - 600px);
   }
   &__questions {
     width: 100%;
@@ -63,7 +63,7 @@ body {
     border: 2px solid rgb(68, 77, 105);
     background-color: rgb(68, 77, 105);
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 30px;
+    font-size: 1.8em;
     color: #fff;
     transition: background-color .3s;
     outline: none;
@@ -73,6 +73,9 @@ body {
     }
     &--width {
       width: 50%;
+    }
+    &--margin {
+      margin-bottom: calc(100vh - 600px);
     }
   }
 }
@@ -168,13 +171,15 @@ body {
   }
   &__similar {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    // flex-wrap: wrap;
+    // justify-content: space-around;
+    overflow: scroll;
     &-poster {
       width: 300px;
       height: 450px;
       transition: all .3s;
       opacity: .7;
+      margin: 0 10px 10px 0;
       &:hover {
         transform: scale(1.05);
         opacity: 1;
@@ -183,11 +188,11 @@ body {
   }
   &__cast {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    overflow: scroll;
     text-align: center;
     &-container {
       width: 33%;
+      margin: 0 10px 10px 0;
     }
   }
 }
@@ -218,6 +223,8 @@ body {
   }
 }
 
+@import './mq/320px';
 @import './mq/425px';
 @import './mq/768px';
 @import './mq/1024px';
+@import './mq/landscape';
