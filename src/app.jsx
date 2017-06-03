@@ -146,7 +146,7 @@ class App extends React.Component {
   }
   setUrl=()=>{
     this.setState({url:
-      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&language=en-US' + '&page=' + this.state.page + '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.' + this.state.dir + this.state.runtime + '&with_genres=' + this.state.genre
+      'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=false&include_video=false&language=en-US' + '&page=' + this.state.page + '&with_original_language=' + this.state.language + '&primary_release_year=' + this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.' + this.state.dir + this.state.runtime + '&with_genres=' + this.state.genre
     })
   }
 }

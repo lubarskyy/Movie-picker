@@ -5,6 +5,7 @@ Live demo - http://lubarski.pl/movie-picker
 
 # Technologies and tools
 * CSS / Sass
+* RWD
 * ES6
 * React.js
 * JSX

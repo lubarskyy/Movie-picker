@@ -9908,7 +9908,7 @@ var App = function (_React$Component) {
     };
 
     _this.setUrl = function () {
-      _this.setState({ url: 'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=true&include_video=false&language=en-US' + '&page=' + _this.state.page + '&with_original_language=' + _this.state.language + '&primary_release_year=' + _this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.' + _this.state.dir + _this.state.runtime + '&with_genres=' + _this.state.genre
+      _this.setState({ url: 'https://api.themoviedb.org/3/discover/movie?api_key=c77922b9a6b67bfd89b55cf3dfd8d3fc&sort_by=popularity.desc&include_adult=false&include_video=false&language=en-US' + '&page=' + _this.state.page + '&with_original_language=' + _this.state.language + '&primary_release_year=' + _this.state.year + '&primary_release_date.lte=2017-06-01' + '&with_runtime.' + _this.state.dir + _this.state.runtime + '&with_genres=' + _this.state.genre
       });
     };
 
