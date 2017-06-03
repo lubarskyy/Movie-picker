@@ -54,14 +54,14 @@ body {
   .main__footer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin-top: calc(100vh - 300px - 406px); }
+    align-items: center; }
   .main__movies {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px; }
+    margin-top: 50px;
+    margin-bottom: calc(100vh - 600px); }
   .main__questions {
     width: 100%; }
   .main__button {
