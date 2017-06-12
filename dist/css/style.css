@@ -159,6 +159,8 @@ body {
   .movie__similar {
     display: flex;
     overflow: scroll; }
+    .movie__similar::-webkit-scrollbar {
+      display: none; }
     .movie__similar-poster {
       width: 300px;
       height: 450px;
@@ -172,6 +174,8 @@ body {
     display: flex;
     overflow: scroll;
     text-align: center; }
+    .movie__cast::-webkit-scrollbar {
+      display: none; }
     .movie__cast-container {
       width: 33%;
       margin: 0 10px 10px 0; }
