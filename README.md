@@ -1,7 +1,7 @@
 # Info
 This application lets you browse the movie database according to defined filters. You can divide the results by 4 categories - production year, genre, runtime and language. Based on your picks, 3 random movie will be selected and shown. Next to short overview and movie details like rating or release date, there are also a trailer, cast and similar movies section.
 
-Live demo - http://lubarski.pl/movie-picker
+Live demo - https://lubarskyy.github.io/Movie-picker/
 
 # Technologies and tools
 * CSS / Sass
